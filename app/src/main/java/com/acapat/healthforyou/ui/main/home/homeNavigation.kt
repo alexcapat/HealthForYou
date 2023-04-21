@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.acapat.healthforyou.Screen
 import com.acapat.healthforyou.ui.main.home.bodycomposition.BodyCompositionScreen
+import com.acapat.healthforyou.ui.main.home.bodycomposition.add.AddBodyCompositionScreen
 import com.acapat.healthforyou.ui.main.home.food.FoodScreen
 import com.acapat.healthforyou.ui.main.home.food.add.AddFoodScreen
 import com.acapat.healthforyou.ui.main.home.steps.StepsScreen
@@ -28,16 +29,25 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
     composable(HomeScreen.STEPS_GOAL.route) {
       StepsScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
     }
+    //==================================================================================================
+
     composable(HomeScreen.FOOD.route) {
       FoodScreen(
         onAddFoodClick = { navController.navigate(HomeScreen.ADD_FOOD.route) },
         modifier = screenModifier
       )
     }
-    composable(HomeScreen.ADD_FOOD.route) {
-      AddFoodScreen(modifier = screenModifier)
-    }
+    composable(HomeScreen.ADD_FOOD.route) { AddFoodScreen(modifier = screenModifier) }
+//==================================================================================================
+
     composable(HomeScreen.WATER.route) { WaterScreen() }
-    composable(HomeScreen.BODY_COMPOSITION.route) { BodyCompositionScreen() }
+//==================================================================================================
+    composable(HomeScreen.ADD_BODY_COMPOSITION.route) { AddBodyCompositionScreen(modifier = screenModifier) }
+    composable(HomeScreen.BODY_COMPOSITION.route) {
+      BodyCompositionScreen(
+        onAddBMIClick = { navController.navigate(HomeScreen.ADD_BODY_COMPOSITION.route) },
+        modifier = screenModifier
+      )
+    }
   }
 }

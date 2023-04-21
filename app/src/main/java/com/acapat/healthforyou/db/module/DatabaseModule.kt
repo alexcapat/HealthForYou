@@ -10,15 +10,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module @InstallIn(SingletonComponent::class)
+@Module
+@InstallIn(SingletonComponent::class)
 internal object DatabaseModule {
 
-    @Provides
-    @Singleton
-    fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(context,HealthForYouDatabase::class.java,"health_for_you")
-        .build()
+  @Provides
+  @Singleton
+  fun provideDatabase(@ApplicationContext context: Context) =
+    Room.databaseBuilder(context, HealthForYouDatabase::class.java, "health_for_you").build()
 
-    @Provides
-    fun provideFoodDao(database: HealthForYouDatabase) = database.foodDao()
-
+  @Provides fun provideFoodDao(database: HealthForYouDatabase) = database.foodDao()
+  @Provides fun provideBMIDao(database: HealthForYouDatabase) = database.bodyDao()
 }

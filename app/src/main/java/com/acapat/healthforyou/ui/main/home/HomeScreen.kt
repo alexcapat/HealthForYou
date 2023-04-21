@@ -67,5 +67,6 @@ enum class HomeScreen(val route: String) {
   STEPS_GOAL("steps_goal"),
   WATER("water"),
   SLEEP("sleep"),
-  BODY_COMPOSITION("body_composition")
+  BODY_COMPOSITION("body_composition"),
+  ADD_BODY_COMPOSITION("add_body_composition")
 }
