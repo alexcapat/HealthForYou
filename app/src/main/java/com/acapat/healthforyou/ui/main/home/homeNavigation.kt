@@ -12,7 +12,8 @@ import com.acapat.healthforyou.ui.main.home.bodycomposition.add.AddBodyCompositi
 import com.acapat.healthforyou.ui.main.home.food.FoodScreen
 import com.acapat.healthforyou.ui.main.home.food.add.AddFoodScreen
 import com.acapat.healthforyou.ui.main.home.steps.StepsScreen
-import com.acapat.healthforyou.ui.main.home.water.add.WaterScreen
+import com.acapat.healthforyou.ui.main.home.water.WaterScreen
+import com.acapat.healthforyou.ui.main.home.water.add.AddWaterScreen
 
 private val screenModifier = Modifier.fillMaxSize()
 
@@ -29,7 +30,7 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
     composable(HomeScreen.STEPS_GOAL.route) {
       StepsScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
     }
-    //==================================================================================================
+    // ==================================================================================================
 
     composable(HomeScreen.FOOD.route) {
       FoodScreen(
@@ -38,11 +39,21 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
       )
     }
     composable(HomeScreen.ADD_FOOD.route) { AddFoodScreen(modifier = screenModifier) }
-//==================================================================================================
+    // ==================================================================================================
 
-    composable(HomeScreen.WATER.route) { WaterScreen() }
-//==================================================================================================
-    composable(HomeScreen.ADD_BODY_COMPOSITION.route) { AddBodyCompositionScreen(modifier = screenModifier) }
+    composable(HomeScreen.ADD_WATER.route) { AddWaterScreen(modifier = screenModifier) }
+    composable(HomeScreen.WATER.route) {
+      WaterScreen(
+        onAddWaterClick = { navController.navigate(HomeScreen.ADD_WATER.route) },
+        modifier = screenModifier
+      )
+    }
+    //    composable(HomeScreen.WATER.route) { AddWaterScreen() }
+
+    // ==================================================================================================
+    composable(HomeScreen.ADD_BODY_COMPOSITION.route) {
+      AddBodyCompositionScreen(modifier = screenModifier)
+    }
     composable(HomeScreen.BODY_COMPOSITION.route) {
       BodyCompositionScreen(
         onAddBMIClick = { navController.navigate(HomeScreen.ADD_BODY_COMPOSITION.route) },

@@ -26,7 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.acapat.healthforyou.R
 
 @Composable
-fun WaterScreen(viewModel: WaterViewModel = hiltViewModel()) {
+fun AddWaterScreen(modifier: Modifier = Modifier, viewModel: AddWaterViewModel = hiltViewModel()) {
   val uiData = viewModel.uiData.collectAsState().value
 
   Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -35,24 +35,16 @@ fun WaterScreen(viewModel: WaterViewModel = hiltViewModel()) {
       verticalArrangement = Arrangement.Center,
       modifier = Modifier.padding(horizontal = 16.dp)
     ) {
-      Box(
-        modifier = Modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
-      ) {
+      Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         Image(
           painter = painterResource(id = R.drawable.drink_512),
           contentDescription = stringResource(id = R.string.water_description)
         )
         Spacer(Modifier.height(16.dp))
       }
-      Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
-      ) {
+      Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
         Button(
-          onClick = {
-            viewModel.removeGlassOfWater(uiData.emptyGlass)
-          },
+          onClick = { viewModel.removeGlassOfWater(uiData.emptyGlass) },
           modifier = Modifier.width(80.dp).height(60.dp),
           shape = RoundedCornerShape(30.dp),
           enabled = uiData.total > 0
@@ -62,9 +54,7 @@ fun WaterScreen(viewModel: WaterViewModel = hiltViewModel()) {
         }
         Spacer(Modifier.width(16.dp))
         Button(
-          onClick = {
-            viewModel.addGlassOfWater(uiData.fullGlass)
-          },
+          onClick = { viewModel.addGlassOfWater(uiData.fullGlass) },
           modifier = Modifier.width(80.dp).height(60.dp),
           shape = RoundedCornerShape(30.dp),
           enabled = uiData.total < 20
@@ -75,15 +65,17 @@ fun WaterScreen(viewModel: WaterViewModel = hiltViewModel()) {
       }
       Spacer(Modifier.height(16.dp))
       Text(
-        text = "Total: ${uiData.total.coerceIn(0..20)} ${
+        text =
+          "Total: ${uiData.total.coerceIn(0..20)} ${
           if (uiData.total == 1) "glass" else "glasses"
         }",
         fontSize = 25.sp
       )
-      Text(
-        text = "(${uiData.totalMillis}ml)",
-        fontSize = 25.sp
-      )
+      Text(text = "(${uiData.totalMillis}ml)", fontSize = 25.sp)
+
+      Button(onClick = viewModel::insertWater, enabled = uiData.isValid && !uiData.isLoading) {
+        Text(text = "Add")
+      }
     }
   }
 }

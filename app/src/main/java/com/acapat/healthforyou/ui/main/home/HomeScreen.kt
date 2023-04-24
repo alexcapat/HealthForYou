@@ -9,7 +9,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -21,7 +20,7 @@ fun HomeScreen(
   onStepGoalClick: () -> Unit
 ) {
   Column(modifier = Modifier.padding()) {
-    Text(text = "HEALTH4YOU", fontSize = 40.sp, color = Color.Blue)
+    //    Text(text = "HEALTH4YOU", fontSize = 40.sp, color = Color.Blue)
     Button(
       onClick = onStepGoalClick,
       modifier = Modifier.fillMaxWidth().height(60.dp).padding(top = 16.dp),
@@ -66,7 +65,9 @@ enum class HomeScreen(val route: String) {
   ADD_FOOD("add_food"),
   STEPS_GOAL("steps_goal"),
   WATER("water"),
+  ADD_WATER("add_water"),
   SLEEP("sleep"),
+  ADD_SLEEP("add_sleep"),
   BODY_COMPOSITION("body_composition"),
   ADD_BODY_COMPOSITION("add_body_composition")
 }

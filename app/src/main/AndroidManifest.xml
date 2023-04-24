@@ -3,17 +3,24 @@
     package="com.acapat.healthforyou">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.health.READ_STEPS" />
+    <uses-permission android:name="android.permission.health.WRITE_STEPS" />
+
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
+
     <application
-        android:allowBackup="true"
+        android:name=".MainApplication"
+        android:allowBackup="false"
         android:icon="@mipmap/icons8_samsung"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".MainApplication"
         android:theme="@style/Theme.HealthForYou">
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
