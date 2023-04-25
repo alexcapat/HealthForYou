@@ -17,4 +17,7 @@ interface WaterDao {
   @Query("SELECT * FROM water") suspend fun getAllWater(): List<WaterEntity>
 
   @Query("SELECT * FROM water") fun getAllWaterFlow(): Flow<List<WaterEntity>>
+
+  @Query("SELECT * FROM water ORDER BY glasses DESC LIMIT 3")
+  suspend fun getTopWaters(): List<WaterEntity>
 }

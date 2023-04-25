@@ -15,6 +15,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -22,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.acapat.healthforyou.MainNavigator
 import com.acapat.healthforyou.Screen
 import com.acapat.healthforyou.ui.main.home.homeNavigation
+import com.acapat.healthforyou.ui.main.records.PersonalStatsScreen
 import com.acapat.healthforyou.ui.main.videos.VideosScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,18 +51,7 @@ fun MainScreen(navigator: MainNavigator, modifier: Modifier = Modifier) {
         }
       )
     },
-    bottomBar = {
-      NavigationBar(modifier = Modifier.fillMaxWidth()) {
-        Screen.values().forEach {
-          NavigationBarItem(
-            selected = false,
-            onClick = { navController.navigate(it.route) },
-            icon = { Icon(imageVector = it.icon, contentDescription = null) },
-            label = { Text(text = it.label) }
-          )
-        }
-      }
-    }
+    bottomBar = { BottomBar(navController = navController) }
   ) { padding ->
     NavHost(
       navController = navController,
@@ -68,12 +60,26 @@ fun MainScreen(navigator: MainNavigator, modifier: Modifier = Modifier) {
     ) {
       homeNavigation(navController)
       composable(Screen.VIDEOS.route) { VideosScreen() }
-      composable(Screen.MY_STATS.route) { MyStatsScreen() }
+      composable(Screen.MY_STATS.route) { PersonalStatsScreen() }
     }
   }
 }
 
 @Composable
-fun MyStatsScreen() {
-  /*TODO*/
+private fun BottomBar(navController: NavHostController) {
+  val currentDestination = navController.currentBackStackEntryAsState().value
+
+  val hierarchy = currentDestination?.destination?.hierarchy
+
+  println(hierarchy?.toList())
+  NavigationBar(modifier = Modifier.fillMaxWidth()) {
+    Screen.values().forEach { screen ->
+      NavigationBarItem(
+        selected = hierarchy?.any { it.route == screen.route } == true,
+        onClick = { navController.navigate(screen.route) },
+        icon = { Icon(imageVector = screen.icon, contentDescription = null) },
+        label = { Text(text = screen.label) }
+      )
+    }
+  }
 }

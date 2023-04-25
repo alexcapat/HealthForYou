@@ -17,4 +17,7 @@ interface BodyDao {
   @Query("SELECT * FROM bmi") suspend fun getAllBMI(): List<BodyEntity>
 
   @Query("SELECT * FROM bmi") fun getAllBMIFlow(): Flow<List<BodyEntity>>
+
+  @Query("SELECT * FROM bmi ORDER BY (weight / (height * height)) DESC LIMIT 3")
+  suspend fun getTopBmi(): List<BodyEntity>
 }

@@ -20,4 +20,7 @@ interface FoodDao {
 
     @Query("SELECT * FROM food")
     fun getAllFoodsFlow(): Flow<List<FoodEntity>>
+
+    @Query("SELECT * FROM food ORDER BY (breakfast + lunch + dinner) DESC LIMIT 3")
+    suspend fun getTopFoods(): List<FoodEntity>
 }

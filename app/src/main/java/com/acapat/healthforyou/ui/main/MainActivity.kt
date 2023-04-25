@@ -12,12 +12,16 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 import androidx.health.connect.client.PermissionController
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
 import androidx.lifecycle.lifecycleScope
 import com.acapat.healthforyou.MainNavigator
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    WindowCompat.setDecorFitsSystemWindows(window, false)
 
     setContent {
       val isDarkMode = isSystemInDarkTheme()
@@ -55,6 +60,22 @@ class MainActivity : AppCompatActivity() {
             lightColorScheme()
           }
         }
+
+      val systemUiController = rememberSystemUiController()
+      val useDarkIcons = !isDarkMode
+
+      DisposableEffect(systemUiController, useDarkIcons) {
+        // Update all of the system bar colors to be transparent, and use
+        // dark icons if we're in light theme
+        systemUiController.setSystemBarsColor(
+          color = Color.Transparent,
+          darkIcons = useDarkIcons
+        )
+
+        // setStatusBarColor() and setNavigationBarColor() also exist
+
+        onDispose {}
+      }
 
       MaterialTheme(colorScheme = colorScheme) {
         MainScreen(navigator = mainNavigator, modifier = Modifier.fillMaxSize())

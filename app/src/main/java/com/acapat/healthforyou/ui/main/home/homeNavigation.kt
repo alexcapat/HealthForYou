@@ -27,10 +27,11 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
         onBodyCompositionClick = { navController.navigate(HomeScreen.BODY_COMPOSITION.route) }
       )
     }
+    // ================Steps=====================================================
     composable(HomeScreen.STEPS_GOAL.route) {
       StepsScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
     }
-    // ==================================================================================================
+    /// ================Food=====================================================
 
     composable(HomeScreen.FOOD.route) {
       FoodScreen(
@@ -39,7 +40,7 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
       )
     }
     composable(HomeScreen.ADD_FOOD.route) { AddFoodScreen(modifier = screenModifier) }
-    // ==================================================================================================
+    // ================Water=====================================================
 
     composable(HomeScreen.ADD_WATER.route) { AddWaterScreen(modifier = screenModifier) }
     composable(HomeScreen.WATER.route) {
@@ -48,9 +49,8 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
         modifier = screenModifier
       )
     }
-    //    composable(HomeScreen.WATER.route) { AddWaterScreen() }
 
-    // ==================================================================================================
+    // ================Body Composition=====================================================
     composable(HomeScreen.ADD_BODY_COMPOSITION.route) {
       AddBodyCompositionScreen(modifier = screenModifier)
     }
