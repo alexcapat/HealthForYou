@@ -11,6 +11,8 @@ import com.acapat.healthforyou.ui.main.home.bodycomposition.BodyCompositionScree
 import com.acapat.healthforyou.ui.main.home.bodycomposition.add.AddBodyCompositionScreen
 import com.acapat.healthforyou.ui.main.home.food.FoodScreen
 import com.acapat.healthforyou.ui.main.home.food.add.AddFoodScreen
+import com.acapat.healthforyou.ui.main.home.sleep.SleepScreen
+import com.acapat.healthforyou.ui.main.home.sleep.add.AddSleepScreen
 import com.acapat.healthforyou.ui.main.home.steps.StepsScreen
 import com.acapat.healthforyou.ui.main.home.water.WaterScreen
 import com.acapat.healthforyou.ui.main.home.water.add.AddWaterScreen
@@ -23,6 +25,7 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
       HomeScreen(
         onStepGoalClick = { navController.navigate(HomeScreen.STEPS_GOAL.route) },
         onFoodClick = { navController.navigate(HomeScreen.FOOD.route) },
+        onSleepClick = { navController.navigate(HomeScreen.SLEEP.route) },
         onWaterClick = { navController.navigate(HomeScreen.WATER.route) },
         onBodyCompositionClick = { navController.navigate(HomeScreen.BODY_COMPOSITION.route) }
       )
@@ -31,8 +34,16 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
     composable(HomeScreen.STEPS_GOAL.route) {
       StepsScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
     }
-    /// ================Food=====================================================
+    /// ================Sleep=====================================================
 
+    composable(HomeScreen.SLEEP.route) {
+      SleepScreen(
+        onAddSleepClick = { navController.navigate(HomeScreen.ADD_SLEEP.route) },
+        modifier = screenModifier
+      )
+    }
+    composable(HomeScreen.ADD_SLEEP.route) { AddSleepScreen(modifier = screenModifier) }
+    /// ================Food=====================================================
     composable(HomeScreen.FOOD.route) {
       FoodScreen(
         onAddFoodClick = { navController.navigate(HomeScreen.ADD_FOOD.route) },
@@ -40,6 +51,7 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
       )
     }
     composable(HomeScreen.ADD_FOOD.route) { AddFoodScreen(modifier = screenModifier) }
+
     // ================Water=====================================================
 
     composable(HomeScreen.ADD_WATER.route) { AddWaterScreen(modifier = screenModifier) }

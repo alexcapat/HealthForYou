@@ -22,5 +22,7 @@ internal object DatabaseModule {
   @Provides fun provideFoodDao(database: HealthForYouDatabase) = database.foodDao()
   @Provides fun provideBMIDao(database: HealthForYouDatabase) = database.bodyDao()
   @Provides fun provideWaterDao(database: HealthForYouDatabase) = database.waterDao()
+  @Provides fun provideSleepDao(database: HealthForYouDatabase) = database.sleepDao()
+
 
 }

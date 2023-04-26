@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun HomeScreen(
   onFoodClick: () -> Unit,
+  onSleepClick: () -> Unit,
   onWaterClick: () -> Unit,
   onBodyCompositionClick: () -> Unit,
   onStepGoalClick: () -> Unit
@@ -36,7 +37,7 @@ fun HomeScreen(
       Text(text = "Food", fontSize = 20.sp)
     }
     Button(
-      onClick = { /*TODO*/},
+      onClick = onSleepClick,
       modifier = Modifier.fillMaxWidth().height(60.dp).padding(top = 16.dp),
       shape = RoundedCornerShape(45.dp)
     ) {
