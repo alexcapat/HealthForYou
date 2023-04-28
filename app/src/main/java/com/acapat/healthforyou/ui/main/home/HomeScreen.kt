@@ -21,7 +21,6 @@ fun HomeScreen(
   onStepGoalClick: () -> Unit
 ) {
   Column(modifier = Modifier.padding()) {
-    //    Text(text = "HEALTH4YOU", fontSize = 40.sp, color = Color.Blue)
     Button(
       onClick = onStepGoalClick,
       modifier = Modifier.fillMaxWidth().height(60.dp).padding(top = 16.dp),

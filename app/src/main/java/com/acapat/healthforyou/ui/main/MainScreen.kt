@@ -68,7 +68,6 @@ fun MainScreen(navigator: MainNavigator, modifier: Modifier = Modifier) {
 @Composable
 private fun BottomBar(navController: NavHostController) {
   val currentDestination = navController.currentBackStackEntryAsState().value
-
   val hierarchy = currentDestination?.destination?.hierarchy
 
   println(hierarchy?.toList())

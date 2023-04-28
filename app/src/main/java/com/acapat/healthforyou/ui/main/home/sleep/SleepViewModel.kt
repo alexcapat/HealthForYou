@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SleepViewModel @Inject constructor(private val sleepDao: SleepDao) : ViewModel() {
-
   private val _uiData = MutableStateFlow(SleepUiData(emptyList()))
   val uiData = _uiData.asStateFlow()
 

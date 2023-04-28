@@ -30,12 +30,13 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
         onBodyCompositionClick = { navController.navigate(HomeScreen.BODY_COMPOSITION.route) }
       )
     }
-    // ================Steps=====================================================
+
+    /* Steps */
     composable(HomeScreen.STEPS_GOAL.route) {
       StepsScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
     }
-    /// ================Sleep=====================================================
 
+    /* Sleep */
     composable(HomeScreen.SLEEP.route) {
       SleepScreen(
         onAddSleepClick = { navController.navigate(HomeScreen.ADD_SLEEP.route) },
@@ -43,7 +44,8 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
       )
     }
     composable(HomeScreen.ADD_SLEEP.route) { AddSleepScreen(modifier = screenModifier) }
-    /// ================Food=====================================================
+
+    /* Food */
     composable(HomeScreen.FOOD.route) {
       FoodScreen(
         onAddFoodClick = { navController.navigate(HomeScreen.ADD_FOOD.route) },
@@ -52,25 +54,24 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
     }
     composable(HomeScreen.ADD_FOOD.route) { AddFoodScreen(modifier = screenModifier) }
 
-    // ================Water=====================================================
-
-    composable(HomeScreen.ADD_WATER.route) { AddWaterScreen(modifier = screenModifier) }
+    /* Water */
     composable(HomeScreen.WATER.route) {
       WaterScreen(
         onAddWaterClick = { navController.navigate(HomeScreen.ADD_WATER.route) },
         modifier = screenModifier
       )
     }
+    composable(HomeScreen.ADD_WATER.route) { AddWaterScreen(modifier = screenModifier) }
 
-    // ================Body Composition=====================================================
-    composable(HomeScreen.ADD_BODY_COMPOSITION.route) {
-      AddBodyCompositionScreen(modifier = screenModifier)
-    }
+    /* Body Composition */
     composable(HomeScreen.BODY_COMPOSITION.route) {
       BodyCompositionScreen(
         onAddBMIClick = { navController.navigate(HomeScreen.ADD_BODY_COMPOSITION.route) },
         modifier = screenModifier
       )
+    }
+    composable(HomeScreen.ADD_BODY_COMPOSITION.route) {
+      AddBodyCompositionScreen(modifier = screenModifier)
     }
   }
 }

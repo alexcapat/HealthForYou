@@ -50,7 +50,6 @@ fun FoodScreen(
     }
   }
 }
-
 @Composable
 fun FoodItem(food: FoodEntity, onDelete: () -> Unit, modifier: Modifier = Modifier) {
   Box(

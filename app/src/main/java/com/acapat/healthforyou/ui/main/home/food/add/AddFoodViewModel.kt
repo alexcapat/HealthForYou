@@ -13,11 +13,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class AddFoodViewModel @Inject constructor(
-  private val foodDao: FoodDao,
-  private val navigator: MainNavigator
-  ) : ViewModel() {
-
+class AddFoodViewModel
+@Inject
+constructor(private val foodDao: FoodDao, private val navigator: MainNavigator) : ViewModel() {
   private val _uiData = MutableStateFlow(AddFoodUiData())
   val uiData = _uiData.asStateFlow()
 
@@ -30,17 +28,12 @@ class AddFoodViewModel @Inject constructor(
   fun setLunch(lunch: String) {
     _uiData.update { it.copy(lunch = lunch) }
   }
-
   fun insertFood() {
     viewModelScope.launch {
       _uiData.update { it.copy(isLoading = true) }
       val foodEntity =
         with(_uiData.value) {
-          FoodEntity(
-            breakfast = breakfast.toInt(),
-            lunch = lunch.toInt(),
-            dinner = dinner.toInt()
-          )
+          FoodEntity(breakfast = breakfast.toInt(), lunch = lunch.toInt(), dinner = dinner.toInt())
         }
       foodDao.insertFood(foodEntity)
       navigator.navigateUp()

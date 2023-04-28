@@ -18,10 +18,6 @@ class AddBodyCompositionViewModel
 constructor(private val bodyDao: BodyDao, private val navigator: MainNavigator) : ViewModel() {
   private val _uiData = MutableStateFlow(AddBodyCompositionUiData())
   val uiData = _uiData.asStateFlow()
-
-  //    fun setAge(age: Int) {
-  //        _uiData.update { it.copy(age = age) }
-  //    }
   fun setWeight(weight: String) {
     _uiData.update { it.copy(weight = weight) }
   }

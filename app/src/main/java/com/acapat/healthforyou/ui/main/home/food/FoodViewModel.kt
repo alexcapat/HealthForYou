@@ -18,17 +18,13 @@ class FoodViewModel @Inject constructor(private val foodDao: FoodDao) : ViewMode
 
   private val _uiData = MutableStateFlow(FoodUiData(emptyList()))
   val uiData = _uiData.asStateFlow()
-
   init {
     foodDao
       .getAllFoodsFlow()
       .onEach { foods -> _uiData.update { it.copy(foods = foods) } }
       .launchIn(viewModelScope)
   }
-
   fun deleteFood(foodEntity: FoodEntity) {
-    viewModelScope.launch {
-      foodDao.deleteFood(foodEntity)
-    }
+    viewModelScope.launch { foodDao.deleteFood(foodEntity) }
   }
 }

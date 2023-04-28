@@ -3,7 +3,6 @@ package com.acapat.healthforyou.ui.main
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,16 +15,12 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import androidx.health.connect.client.PermissionController
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
-import androidx.lifecycle.lifecycleScope
 import com.acapat.healthforyou.MainNavigator
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 // build a set of permissions for required data types
 // Each permission value is a string data type
@@ -67,16 +62,9 @@ class MainActivity : AppCompatActivity() {
       DisposableEffect(systemUiController, useDarkIcons) {
         // Update all of the system bar colors to be transparent, and use
         // dark icons if we're in light theme
-        systemUiController.setSystemBarsColor(
-          color = Color.Transparent,
-          darkIcons = useDarkIcons
-        )
-
-        // setStatusBarColor() and setNavigationBarColor() also exist
-
+        systemUiController.setSystemBarsColor(color = Color.Transparent, darkIcons = useDarkIcons)
         onDispose {}
       }
-
       MaterialTheme(colorScheme = colorScheme) {
         MainScreen(navigator = mainNavigator, modifier = Modifier.fillMaxSize())
       }
