@@ -13,7 +13,7 @@ import com.acapat.healthforyou.ui.main.home.food.FoodScreen
 import com.acapat.healthforyou.ui.main.home.food.add.AddFoodScreen
 import com.acapat.healthforyou.ui.main.home.sleep.SleepScreen
 import com.acapat.healthforyou.ui.main.home.sleep.add.AddSleepScreen
-import com.acapat.healthforyou.ui.main.home.steps.StepsScreen
+import com.acapat.healthforyou.ui.main.home.steps.stepsNavigation
 import com.acapat.healthforyou.ui.main.home.water.WaterScreen
 import com.acapat.healthforyou.ui.main.home.water.add.AddWaterScreen
 
@@ -32,9 +32,7 @@ fun NavGraphBuilder.homeNavigation(navController: NavController) {
     }
 
     /* Steps */
-    composable(HomeScreen.STEPS_GOAL.route) {
-      StepsScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
-    }
+    stepsNavigation(navController)
 
     /* Sleep */
     composable(HomeScreen.SLEEP.route) {
