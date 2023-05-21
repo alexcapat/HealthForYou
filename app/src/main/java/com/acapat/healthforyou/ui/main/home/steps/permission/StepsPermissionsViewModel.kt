@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.navOptions
 import com.acapat.healthforyou.MainNavigator
+import com.acapat.healthforyou.ui.main.home.HomeScreen
 import com.acapat.healthforyou.ui.main.home.steps.StepsScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -31,7 +33,10 @@ constructor(
     _uiData
       .onEach {
         if (it.granted == true) {
-          navigator.navigateTo(StepsScreen.STEPS_DATA.route)
+          navigator.navigateTo(
+            StepsScreen.STEPS_DATA.route,
+            navOptions { popUpTo(HomeScreen.STEPS_GOAL.route) }
+          )
         }
       }
       .launchIn(viewModelScope)

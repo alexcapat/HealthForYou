@@ -33,7 +33,9 @@ fun MainScreen(navigator: MainNavigator, modifier: Modifier = Modifier) {
   val navController = rememberNavController()
   LaunchedEffect(navigator) { navigator.navigateUpFlow.collect { navController.navigateUp() } }
   LaunchedEffect(navigator) {
-    navigator.navigationRoutesFlow.collect { route -> navController.navigate(route) }
+    navigator.navigationRoutesFlow.collect { (route, options) ->
+      navController.navigate(route, options)
+    }
   }
   Scaffold(
     modifier = modifier,

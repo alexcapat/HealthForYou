@@ -20,8 +20,6 @@ fun NavGraphBuilder.stepsNavigation(navController: NavController) {
   ) {
     composable(StepsScreen.AVAILABILITY.route) { StepsAvailabilityScreen() }
     composable(StepsScreen.PERMISSION.route) { StepsPermissionScreen() }
-    composable(StepsScreen.STEPS_DATA.route) {
-      StepsDataScreen(stepCount = 5, kmCount = 5, kcalCount = 5)
-    }
+    composable(StepsScreen.STEPS_DATA.route) { StepsDataScreen() }
   }
 }
