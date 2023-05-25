@@ -15,25 +15,40 @@ import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 @HiltViewModel
-class StepsDataViewModel @Inject constructor(@ApplicationContext private val context: Context) :
-  ViewModel() {
+class StepsDataViewModel
+@Inject
+constructor(
+  @ApplicationContext private val context: Context,
+) : ViewModel() {
 
   private val healthConnectClient = HealthConnectClient.getOrCreate(context)
   private val _uiData = MutableStateFlow(StepsDataUiData())
   val uiData = _uiData.asStateFlow()
 
+  private val _selectedDate = MutableStateFlow(Instant.now())
+
   init {
-    viewModelScope.launch {
-      val today = Instant.now()
-      val filter = createTimeRangeFilter(today)
-      val data = getData(filter)
-      _uiData.update { it.copy(isLoading = false, data = data) }
-    }
+    _selectedDate
+      .onEach { instant ->
+        _uiData.update { it.copy(instant = instant, isLoading = true) }
+
+        val filter = createTimeRangeFilter(instant)
+        val data = getData(filter)
+
+        _uiData.update { it.copy(isLoading = false, data = data) }
+      }
+      .launchIn(viewModelScope)
   }
+
+  fun selectDay(instant: Instant) {
+    _selectedDate.value = instant
+  }
+
   private suspend fun getData(filter: TimeRangeFilter): StepsData {
     val response =
       healthConnectClient.aggregate(
